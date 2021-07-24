@@ -8,7 +8,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Ubuntu utils
 RUN apt-get update && \ 
-    apt-get install -y software-properties-common git wget libpq-dev libsodium-dev
+    apt-get install -y software-properties-common git wget gosu \
+    libsodium-dev libpq-dev
 
 ## Install jdk 11
 RUN add-apt-repository -y ppa:linuxuprising/java
@@ -19,31 +20,33 @@ WORKDIR /home/clightning4j
 ENV CLIGHTNING_VERSION=0.10.0
 ENV CLIGHTNING_DATA=/home/clightning4j/.lightning
 
-RUN mkdir build && cd build && \
-    wget https://github.com/ElementsProject/lightning/releases/download/v${CLIGHTNING_VERSION}/clightning-v${CLIGHTNING_VERSION}-Ubuntu-20.04.tar.xz && \
-    tar -xvf clightning-v${CLIGHTNING_VERSION}-Ubuntu-20.04.tar.xz && \
-    mv usr clightning-v${CLIGHTNING_VERSION} && \
-    mv clightning-v${CLIGHTNING_VERSION} ../
+RUN wget https://github.com/ElementsProject/lightning/releases/download/v$CLIGHTNING_VERSION/clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz && \
+    tar -xvf clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz -C /opt && cd /opt && \
+    mv usr clightning-v$CLIGHTNING_VERSION
 
-RUN git clone https://github.com/clightning4j/btcli4j.git && cd btcli4j && \
+RUN rm -r clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz 
+
+RUN cd /opt && \
+    git clone https://github.com/clightning4j/btcli4j.git && cd btcli4j && \
+    ./gradlew createRunnableScript && \
+    cd .. && \
+    git clone https://github.com/clightning4j/lightning-rest.git && cd lightning-rest && \
     ./gradlew createRunnableScript
 
-RUN ls -l && cd clightning-v${CLIGHTNING_VERSION} && ls -l
+RUN mkdir "${CLIGHTNING_DATA}"
 
-RUN mkdir /home/clightning4j/.lightning
+COPY config/config /opt
 
-COPY config/config /home/clightning4j/.lightning
-
-ENV PATH="/home/clightning4j/clightning-v${CLIGHTNING_VERSION}/bin:${PATH}"
+ENV PATH=/opt/clightning-v$CLIGHTNING_VERSION/bin:$PATH
 
 COPY entrypoint.sh /entrypoint.sh
 
-VOLUME ["/home/clightning4j/.lightning"]
+VOLUME ["/home/clightning4j"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
 RUN echo $(lightningd --version)
-RUN apt install -y gosu
+RUN echo ${CLIGHTNING_DATA}/config
 
 CMD ["lightningd"]
 # TODO adding plugin https://github.com/clightning4j/lightning-rest

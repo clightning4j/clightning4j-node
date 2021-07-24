@@ -12,7 +12,7 @@ services:
             -rpcpassword=clightning4j
             -server
             -prune=550
-            -daemon
+            #-daemon
         ports:
         - 18443:18443
 
@@ -21,13 +21,14 @@ services:
             .
         depends_on: 
             - bitcoind
+        volumes:
+            - ./data:/home/clightning4j
         command:
-            --network=bitcoin
-            --lightning-dir=/home/clightning4j/.lightning
-            --alias=clightning4j-node
-            --disable-plugin bcli
-            --bitcoin-rpcuser=clightning4j
+            --network=bitcoin 
+            --alias=clihgnting4j-node 
+            --disable-plugin=bcli
+            --bitcoin-rpcuser=clightning4j 
             --bitcoin-rpcpassword=clightning4j
-            --bitcoin-rpcurl=http://bitcoind:8332
+            --bitcoin-rpcurl=http://bitcoind:8332 
             --btcli4j-pruned
             #--daemon

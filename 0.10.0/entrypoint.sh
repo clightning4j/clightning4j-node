@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+echo $PATH
+cd /opt
+ls -l
+
 if [ $(echo "$1" | cut -c1) = "-" ]; then
   echo "$0: assuming arguments for lightningd"
 
@@ -8,13 +12,14 @@ if [ $(echo "$1" | cut -c1) = "-" ]; then
 fi
 
 if [ $(echo "$1" | cut -c1) = "-" ] || [ "$1" = "lightningd" ]; then
-  mkdir -p "$CLIGHTNING_DATA"
+  mkdir "$CLIGHTNING_DATA"
+  cp /opt/config "$CLIGHTNING_DATA/config"
   chmod 777 "$CLIGHTNING_DATA"
   chown -R clightning4j "$CLIGHTNING_DATA"
 
   echo "$0: setting data directory to $CLIGHTNING_DATA"
 
-  set -- "$@" -datadir="$CLIGHTNING_DATA"
+  set -- "$@" --lightning-dir="$CLIGHTNING_DATA"
 fi
 
 if [ "$1" = "lightningd" ] || [ "$1" = "lightning-cli" ] ; then

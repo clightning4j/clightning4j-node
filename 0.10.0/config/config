@@ -1,4 +1,4 @@
-#config c-lightning
+# config c-lightning
 # network=liquid
 # alias=SLICKERGOPHER
 # rgb=02bf81
@@ -9,9 +9,9 @@
 # bitcoin-rpcpassword=vincent
 # bitcoin-rpcurl=http://127.0.0.1:8332
 
-plugin=/home/clightning4j/btcli4j/btcli4j-gen.sh
-#plugin=/home/clightning4j/lightning-rest/lightning-rest-gen.sh
+plugin=/opt/btcli4j/btcli4j-gen.sh
+plugin=/opt/lightning-rest/lightning-rest-gen.sh
 
 log-level=info
-#log-file=/home/clightning4j/.lightning/log.log
+log-file=/home/clightning4j/.lightning/log.log
 allow-deprecated-apis=false
