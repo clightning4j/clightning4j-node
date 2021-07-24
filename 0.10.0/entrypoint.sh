@@ -1,10 +1,6 @@
 #!/bin/sh
 set -e
 
-echo $PATH
-cd /opt
-ls -l
-
 if [ $(echo "$1" | cut -c1) = "-" ]; then
   echo "$0: assuming arguments for lightningd"
 

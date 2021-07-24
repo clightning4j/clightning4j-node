@@ -28,9 +28,11 @@ RUN rm -r clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz
 
 RUN cd /opt && \
     git clone https://github.com/clightning4j/btcli4j.git && cd btcli4j && \
+    git checkout tags/v0.0.2 -b v0.0.2-b && \
     ./gradlew createRunnableScript && \
     cd .. && \
     git clone https://github.com/clightning4j/lightning-rest.git && cd lightning-rest && \
+    git checkout tags/v0.0.1 -b v0.0.1-b && \
     ./gradlew createRunnableScript
 
 RUN mkdir "${CLIGHTNING_DATA}"
@@ -49,5 +51,3 @@ RUN echo $(lightningd --version)
 RUN echo ${CLIGHTNING_DATA}/config
 
 CMD ["lightningd"]
-# TODO adding plugin https://github.com/clightning4j/lightning-rest
-

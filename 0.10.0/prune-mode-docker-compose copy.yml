@@ -5,16 +5,13 @@ services:
         image: ruimarinho/bitcoin-core:0.21-alpine
         command:
             -printtoconsole
-            -rpcallowip=10.211.0.0/16
-            -rpcallowip=172.17.0.0/16
-            -rpcallowip=192.168.0.0/16
             -rpcuser=clightning4j
             -rpcpassword=clightning4j
             -server
+            -listen
             -prune=550
-            #-daemon
         ports:
-        - 18443:18443
+        - 8332:8332
 
     lightningd:
         build: 
@@ -23,12 +20,14 @@ services:
             - bitcoind
         volumes:
             - ./data:/home/clightning4j
+        ports: 
+            - 7000:7000
         command:
             --network=bitcoin 
             --alias=clihgnting4j-node 
             --disable-plugin=bcli
             --bitcoin-rpcuser=clightning4j 
             --bitcoin-rpcpassword=clightning4j
-            --bitcoin-rpcurl=http://bitcoind:8332 
+            --bitcoin-rpcurl=http://bitcoind_default:8332 
             --btcli4j-pruned
-            #--daemon
+            --jrest-port=7000

@@ -13,5 +13,5 @@ plugin=/opt/btcli4j/btcli4j-gen.sh
 plugin=/opt/lightning-rest/lightning-rest-gen.sh
 
 log-level=info
-log-file=/home/clightning4j/.lightning/log.log
+# log-file=/home/clightning4j/.lightning/log.log
 allow-deprecated-apis=false

@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+    lightningd:
+        build: 
+            .
+        volumes:
+            - ./data:/home/clightning4j
+        ports: 
+            - 7000:7000
+        command:
+            --network=bitcoin 
+            --alias=clihgnting4j-node 
+            --disable-plugin=bcli
+            --jrest-port=7000
