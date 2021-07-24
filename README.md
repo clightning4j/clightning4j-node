@@ -27,8 +27,8 @@ To use the image is possible use the docker or docker compose.
 ### Docker Compose
 
 - v0.10.0 clightning4j-node
-    - [pruning-mode](#TODO)
-    - [lightning-rest](#TODO)
+    - [Example: pruning mode](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.0/prune-mode-docker-compose.yml)
+    - [Example: Esplora rest](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.0/rest-mode-docker-compose.yml)
 
 To enable the rest service you can run the following commands
 

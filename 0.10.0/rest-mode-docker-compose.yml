@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
     lightningd:
-        build: 
-            .
+        image: vincenzopalazzo/clightning4j-node:v0.10.0-dev1
         volumes:
             - ./data:/home/clightning4j
         ports: 
