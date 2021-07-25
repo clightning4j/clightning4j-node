@@ -11,4 +11,5 @@ services:
             --network=bitcoin 
             --alias=clihgnting4j-node 
             --disable-plugin=bcli
+            --log-level=debug
             --jrest-port=7000

@@ -1,5 +1,7 @@
 # clightning4j-node
 
+![Docker Pulls](https://img.shields.io/docker/pulls/vincenzopalazzo/clightning4j-node?style=flat-square)
+
 ## Table of Content
 
 - Introductions

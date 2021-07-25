@@ -14,8 +14,7 @@ services:
         - 8332:8332
 
     lightningd:
-        build: 
-            .
+        image: vincenzopalazzo/clightning4j-node:v0.10.0-dev1
         depends_on: 
             - bitcoind
         volumes:
@@ -30,4 +29,5 @@ services:
             --bitcoin-rpcpassword=clightning4j
             --bitcoin-rpcurl=http://bitcoind_default:8332 
             --btcli4j-pruned
+            --log-level=debug
             --jrest-port=7000
