@@ -7,6 +7,9 @@ if [ $(echo "$1" | cut -c1) = "-" ]; then
   set -- lightningd "$@"
 fi
 
+# Skip this whole section if $CLIGHTNING_DATA
+# (as defined in Dockerfile ENV) already exists
+test -d "$CLIGHTNING_DATA" || {
 if [ $(echo "$1" | cut -c1) = "-" ] || [ "$1" = "lightningd" ]; then
   mkdir "$CLIGHTNING_DATA"
   cp /opt/config "$CLIGHTNING_DATA/config"
@@ -17,6 +20,7 @@ if [ $(echo "$1" | cut -c1) = "-" ] || [ "$1" = "lightningd" ]; then
 
   set -- "$@" --lightning-dir="$CLIGHTNING_DATA"
 fi
+}
 
 if [ "$1" = "lightningd" ] || [ "$1" = "lightning-cli" ] ; then
   echo
