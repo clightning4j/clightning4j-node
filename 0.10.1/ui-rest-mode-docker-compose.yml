@@ -24,8 +24,12 @@ services:
             - ./data:/home/clightning4j
         command:
             --network=testnet
-            --alias=clihgnting4j-node 
+            --alias=clihgnting4j-node
+            --always-use-proxy=false
+            --bind-addr=0.0.0.0:19735
+            --proxy=0.0.0.0:9040
+            --addr=statictor:0.0.0.0:9051
             --disable-plugin=bcli
-            --log-level=info
+            --log-level=debug
             --jrest-port=7000
             --jrest-on-startup

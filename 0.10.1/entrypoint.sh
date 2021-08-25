@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+
+sudo tor -f /etc/tor/torrc --runasdaemon 1 
+
 if [ $(echo "$1" | cut -c1) = "-" ]; then
   echo "$0: assuming arguments for lightningd"
 

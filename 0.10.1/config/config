@@ -9,6 +9,8 @@
 # bitcoin-rpcpassword=vincent
 # bitcoin-rpcurl=http://127.0.0.1:8332
 
+always-use-proxy=false
+
 plugin=/opt/btcli4j/btcli4j-gen.sh
 plugin=/opt/lightning-rest/lightning-rest-gen.sh
 
