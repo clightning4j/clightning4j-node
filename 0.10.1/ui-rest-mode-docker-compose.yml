@@ -2,34 +2,35 @@ version: "3.8"
 
 services:
     ngnix:
-        depends_on:
-            - lnchecker
         image: nginx:latest
+        depends_on: 
+            - lightningd
         volumes:
             - ./nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "80:8080"
         restart: on-failure
     lnchecker:
-        depends_on:
-            - lightningd
         image: vincenzopalazzo/ln-dashboard:v0.0.1
         restart: on-failure
         environment:
-            - NEXT_PUBLIC_REST_URL=http://ngnix:80/api
+            - NEXT_PUBLIC_REST_URL=http://ngnix:8080/rest
     lightningd:
         # image: vincenzopalazzo/clightning4j-node:v0.10.0-dev1
         build: .
+        depends_on:
+            - lnchecker
         volumes:
             - ./data:/home/clightning4j
         command:
             --network=testnet
             --alias=clihgnting4j-node
-            --always-use-proxy=false
-            --bind-addr=0.0.0.0:19735
+            --rgb=f07178
             --disable-plugin=bcli
             --log-level=debug
             --jrest-port=7000
             --jrest-on-startup
-            #--proxy=0.0.0.0:9040
-            #--addr=statictor:0.0.0.0:9051
+            --bind-addr=127.0.0.1:9735
+            --proxy=127.0.0.1:9050
+            --addr=statictor:127.0.0.1:9051
+            --log-file=/home/clightning4j/.lightning/log.log
