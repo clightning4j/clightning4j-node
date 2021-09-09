@@ -16,7 +16,6 @@
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
 #SOCKSPort 9050 # Default: Bind to localhost:9050 for local connections.
-SOCKSPort 0.0.0.0:9050 # Bind to this address:port too.
 
 ## Entry policies to allow/deny SOCKS requests based on IP address.
 ## First entry that matches wins. If no SOCKSPolicy is set, we accept
@@ -250,6 +249,8 @@ RunAsDaemon 1
 ## on subfolders are ignored.
 ## The %include option can be used recursively.
 #%include /etc/torrc.d/*.conf
+
+ExitPolicy reject *:* # no exits allowed
 
 ControlPort 9051
 CookieAuthentication 1

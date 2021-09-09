@@ -1,13 +1,17 @@
 #!/bin/sh
+echo $PWD
+
 set -e
 
+tor -f /opt/torrc --runasdaemon 1 --quiet
 
-sudo tor -f /etc/tor/torrc --runasdaemon 1 
+curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/ | cat | grep -m 1 Congratulations | xargs
+
+chown -R clightning4j /home/clightning4j/.tor
 
 if [ $(echo "$1" | cut -c1) = "-" ]; then
   echo "$0: assuming arguments for lightningd"
-
-  set -- lightningd "$@"
+  set -- lightningd --lightning-dir="$CLIGHTNING_DATA" "$@"
 fi
 
 # Skip this whole section if $CLIGHTNING_DATA
@@ -15,19 +19,15 @@ fi
 test -d "$CLIGHTNING_DATA" || {
 if [ $(echo "$1" | cut -c1) = "-" ] || [ "$1" = "lightningd" ]; then
   mkdir "$CLIGHTNING_DATA"
-  cp /opt/config "$CLIGHTNING_DATA/config"
-  chmod 777 "$CLIGHTNING_DATA"
+  cp /opt/config "$CLIGHTNING_DATA/"
   chown -R clightning4j "$CLIGHTNING_DATA"
 
   echo "$0: setting data directory to $CLIGHTNING_DATA"
-
-  set -- "$@" --lightning-dir="$CLIGHTNING_DATA"
 fi
 }
 
 if [ "$1" = "lightningd" ] || [ "$1" = "lightning-cli" ] ; then
-  echo
-  exec gosu clightning4j "$@"
+  exec su-exec clightning4j "$@"
 fi
 
 echo

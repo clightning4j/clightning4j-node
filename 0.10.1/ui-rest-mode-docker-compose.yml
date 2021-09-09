@@ -16,7 +16,7 @@ services:
         image: vincenzopalazzo/ln-dashboard:v0.0.1
         restart: on-failure
         environment:
-            - NEXT_PUBLIC_REST_URL=http://lightningd:7000
+            - NEXT_PUBLIC_REST_URL=http://ngnix:80/api
     lightningd:
         # image: vincenzopalazzo/clightning4j-node:v0.10.0-dev1
         build: .
@@ -27,9 +27,9 @@ services:
             --alias=clihgnting4j-node
             --always-use-proxy=false
             --bind-addr=0.0.0.0:19735
-            --proxy=0.0.0.0:9040
-            --addr=statictor:0.0.0.0:9051
             --disable-plugin=bcli
             --log-level=debug
             --jrest-port=7000
             --jrest-on-startup
+            #--proxy=0.0.0.0:9040
+            #--addr=statictor:0.0.0.0:9051
