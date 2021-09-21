@@ -21,6 +21,10 @@ The following list contains what the image contains for each version:
 - v0.10.0 clightning4j-node
     - [btcli4j](https://github.com/clightning4j/btcli4j): A plugin to support the Rest API with [esplora]() and Bitcoin Core 0.21.0.
     - [lightning-rest](https://github.com/clightning4j/lightning-rest): Enable a experimental Rest API of c-lightning node.
+- v0.10.1 clightning4j-node
+    - [btcli4j](https://github.com/clightning4j/btcli4j): A plugin to support the Rest API with [esplora]() and Bitcoin Core 0.21.0.
+    - [lightning-rest](https://github.com/clightning4j/lightning-rest): Enable a experimental Rest API of c-lightning node.
+    - [ln-dashboard](https://github.com/clightning4j/ln-dashboard): Enable a experimental dashboard to see basic information of c-lightning node.
 
 ## How to Use
 
@@ -31,6 +35,11 @@ To use the image is possible use the docker or docker compose.
 - v0.10.0 clightning4j-node
     - [Example: pruning mode](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.0/prune-mode-docker-compose.yml)
     - [Example: Esplora rest](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.0/rest-mode-docker-compose.yml)
+- v0.10.1 clightning4j-node
+    - [Example: pruning mode](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.1/prune-mode-docker-compose.yml)
+    - [Example: Esplora rest](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.1/rest-mode-docker-compose.yml)
+    - [Example: Esplora rest with UI dashboard](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.1/ui-rest-mode-docker-compose.yml)
+
 
 To enable the rest service you can run the following commands
 
