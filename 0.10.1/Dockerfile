@@ -1,53 +1,51 @@
-FROM ubuntu:20.04
+FROM openjdk:11
+
+WORKDIR /jdk
+
+RUN git clone https://github.com/clightning4j/btcli4j.git && cd btcli4j && \
+    # git checkout tags/v0.0.2 -b v0.0.2-b && \
+    ./gradlew createRunnableScript -Dorg.gradle.daemon=false --no-build-cache && \
+    cd .. && \
+    git clone https://github.com/clightning4j/lightning-rest.git && cd lightning-rest && \
+    #git checkout tags/v0.0.2 -b v0.0.2-b && \
+    ./gradlew createRunnableScript -Dorg.gradle.daemon=false --no-build-cache
+
+FROM alpine:3.13.6
 LABEL maintainer="Vincenzo Palazzo (@vincenzopalazzo) vincenzopalazzodev@gmail.com"
 
-RUN useradd -r clightning4j
-
-ENV TZ=Europe/Minsk
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Ubuntu utils
-RUN apt-get update && \ 
-    apt-get install -y software-properties-common git wget gosu \
-    libsodium-dev libpq-dev
-
-## Install jdk 11
-RUN add-apt-repository -y ppa:linuxuprising/java
-RUN apt-get update  && apt-get install openjdk-11-jdk -y
-
-WORKDIR /home/clightning4j
+RUN addgroup -S clightning4jgroup && adduser -S clightning4j -G clightning4jgroup
 
 ENV CLIGHTNING_VERSION=0.10.1
 ENV CLIGHTNING_DATA=/home/clightning4j/.lightning
+ENV HOME=/home/clightning4j
 
-RUN wget https://github.com/ElementsProject/lightning/releases/download/v$CLIGHTNING_VERSION/clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz && \
-    tar -xvf clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz -C /opt && cd /opt && \
-    mv usr clightning-v$CLIGHTNING_VERSION
+WORKDIR /home/clightning4j
 
-RUN rm -r clightning-v$CLIGHTNING_VERSION-Ubuntu-20.04.tar.xz 
+RUN apk update && \
+    apk add ca-certificates alpine-sdk autoconf automake git libtool \
+    gmp-dev sqlite-dev python3 py3-mako net-tools zlib-dev libsodium gettext su-exec
 
-RUN cd /opt && \
-    git clone https://github.com/clightning4j/btcli4j.git && cd btcli4j && \
-    git checkout tags/v0.0.2 -b v0.0.2-b && \
-    ./gradlew createRunnableScript && \
-    cd .. && \
-    git clone https://github.com/clightning4j/lightning-rest.git && cd lightning-rest && \
-    git checkout tags/v0.0.2 -b v0.0.2-b && \
-    ./gradlew createRunnableScript
+RUN git clone https://github.com/ElementsProject/lightning.git && \
+    cd lightning && git checkout tags/v$CLIGHTNING_VERSION && \
+    ./configure && git submodule update --init --recursive && \
+    make -j$(nproc) && make install
 
-RUN mkdir "${CLIGHTNING_DATA}"
+RUN apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/community/ add \
+      tor torsocks && \
+    apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ add \
+      obfs4proxy
 
-COPY config/config /opt
+RUN apk add openjdk11-jre && \ 
+    rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
-ENV PATH=/opt/clightning-v$CLIGHTNING_VERSION/bin:$PATH
-
+COPY --from=0 /jdk/lightning-rest/build/libs/*.jar /opt/
+COPY --from=0 /jdk/btcli4j/build/libs/*.jar /opt/
+COPY config/* /opt/
+COPY torrc /opt/
 COPY entrypoint.sh /entrypoint.sh
 
-VOLUME ["/home/clightning4j"]
+RUN echo $(lightningd --version)
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-RUN echo $(lightningd --version)
-RUN echo ${CLIGHTNING_DATA}/config
 
 CMD ["lightningd"]
