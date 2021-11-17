@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  lightningd:
+    # image: vincenzopalazzo/clightning4j-node:v0.10.0-dev1
+    build: .
+    volumes:
+      - ./data:/home/clightning4j
+    ports:
+      - "7000:7000"
+    command:
+      --network=bitcoin
+      --alias=clihgnting4j-node
+      --disable-plugin=bcli
+      --log-level=info
+      --jrest-port=7000
+      --jrest-on-startup
+      --bind-addr=127.0.0.1:9735
+      --proxy=127.0.0.1:9050
+      --addr=statictor:127.0.0.1:9051
+      --log-file=/home/clightning4j/.lightningd/log.log
+      --daemon
