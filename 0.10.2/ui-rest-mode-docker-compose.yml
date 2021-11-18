@@ -16,7 +16,7 @@ services:
         environment:
             - NEXT_PUBLIC_REST_URL=http://ngnix:8080/rest
     lightningd:
-        # image: vincenzopalazzo/clightning4j-node:v0.10.0-dev1
+        image: vincenzopalazzo/clightning4j-node:v0.10.2
         build: .
         depends_on:
             - lnchecker
