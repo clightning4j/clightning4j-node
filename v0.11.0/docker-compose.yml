@@ -14,6 +14,7 @@ services:
             --jrest-port=7001
             --jrest-on-startup
             --lnmetrics-urls=https://api.lnmetrics.info/query
+            --grpc-port=8001
             --bind-addr=127.0.0.1:9735
             --proxy=127.0.0.1:9050
             --addr=statictor:127.0.0.1:9051
