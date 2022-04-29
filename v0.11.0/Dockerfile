@@ -8,7 +8,7 @@ RUN git clone https://github.com/clightning4j/btcli4j.git && cd btcli4j && \
     git clone https://github.com/clightning4j/lightning-rest.git && cd lightning-rest && \
     ./gradlew createRunnableScript -Dorg.gradle.daemon=false --no-build-cache
 
-FROM golang:1.18.1
+FROM golang:1.18.1 as golang_builder
 
 WORKDIR /lnmetrics
 
@@ -60,7 +60,7 @@ RUN git clone https://github.com/vlang/v.git && cd v && \
 
 COPY --from=0 /jdk/lightning-rest/build/libs/*.jar /opt/
 COPY --from=0 /jdk/btcli4j/build/libs/*.jar /opt/
-COPY --from=0 /lnmetrics/go-lnmetrics.reporter/go-lnmetrics /opt/
+COPY --from=golang_builder /lnmetrics/go-lnmetrics.reporter/go-lnmetrics /opt/
 COPY config/* /opt/
 COPY torrc /opt/
 COPY entrypoint.sh /entrypoint.sh
