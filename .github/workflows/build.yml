@@ -1,0 +1,17 @@
+name: Build clightning4j-node with cln 0.11
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        VERSION: ['v0.11.0']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Integration testing
+        run: |
+          cd ${{matrix.VERSION}}
+          docker-compose up
