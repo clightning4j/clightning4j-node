@@ -1,20 +1,16 @@
 name: Release
 
 on:
-  release:
-    types: [created]
-    tags:
-      - v*
-
+  push:
+  pull_request:
 
 jobs:
   docker:
     runs-on: ubuntu-latest
-    steps:release:
-    types: [created]
-    tags:
-      - v*
-  @v2
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -30,7 +26,7 @@ jobs:
       -
         name: Set output
         id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: echo ::set-output name=tag::0.10.2
       -
         name: Build and push
         uses: docker/build-push-action@v2
