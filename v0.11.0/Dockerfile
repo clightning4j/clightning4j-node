@@ -56,19 +56,23 @@ RUN apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpi
 RUN apk add openjdk11-jre && \ 
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
-RUN git clone https://github.com/vlang/v.git && cd v && \
-    make && ./v symlink && \
-    cd ..
+RUN cd /opt && git clone https://github.com/vlang/v.git && cd v && \
+    make && ./v symlink
+
+RUN v --help
 
 COPY --from=0 /jdk/lightning-rest/build/libs/*.jar /opt/
 COPY --from=0 /jdk/btcli4j/build/libs/*.jar /opt/
 COPY --from=golang_builder /lnmetrics/go-lnmetrics.reporter/go-lnmetrics /opt/
 COPY config/* /opt/
-COPY torrc /opt/
+COPY torrc /etc/tor/torrc
 COPY entrypoint.sh /entrypoint.sh
-COPY conf_env.vsh /home/clightning4j/conf_env.vsh
+COPY conf_env.vsh /opt/
 
 RUN echo $(lightningd --version)
+
+VOLUME ["/etc/torrc.d"]
+VOLUME ["/var/lib/tor"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
