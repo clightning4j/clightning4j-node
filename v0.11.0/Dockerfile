@@ -44,9 +44,9 @@ RUN git clone https://github.com/ElementsProject/lightning.git && \
     #python3 -m poetry install && \
     #python3 -m poetry run make -j$(nproc)
     pip3 install mako mistune==0.8.4 mrkd && \
-    make -j$(nproc)
+    make -j$(nproc) && make install
 
-RUN cd lightning && python3 -m poetry run make install 
+#RUN cd lightning && python3 -m poetry run make install 
 
 RUN apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/community/ add \
       tor torsocks && \
