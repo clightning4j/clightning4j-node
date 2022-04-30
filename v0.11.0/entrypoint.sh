@@ -11,4 +11,5 @@ chown -R clightning4j /home/clightning4j/.tor
 chown -R clightning4j /opt
 chown clightning4j /conf_env.vsh
 
+cd /home/clightning4j
 ./conf_env.vsh "$@"
