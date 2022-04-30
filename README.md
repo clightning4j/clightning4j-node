@@ -53,6 +53,14 @@ TODO
 
 ## Support
 
+<div align="center">
+  <img src="https://brink.dev/assets/images/brink_logo.png" width="150"/>
+
+  <p>
+    <strong>Supported by a Brink grant.</strong>
+  </p>
+</div>
+
 If you like the architecture developer and want to support it, please considerer to donate with the following system
 
 - [3BQ8qbn8hLdmBKEjt1Hj1Z6SiDsnjJurfU](bitcoin:3BQ8qbn8hLdmBKEjt1Hj1Z6SiDsnjJurfU)
