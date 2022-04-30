@@ -39,10 +39,12 @@ RUN git clone https://github.com/ElementsProject/lightning.git && \
     source $HOME/.cargo/env && \
     ./configure && git submodule update --init --recursive && \
     pip3 install --upgrade pip && \
-    pip3 install --user poetry && \
+    #pip3 install --user poetry && \
     #python3 -m poetry config virtualenvs.create false --local && \
-    python3 -m poetry install && \
-    python3 -m poetry run make -j$(nproc)
+    #python3 -m poetry install && \
+    #python3 -m poetry run make -j$(nproc)
+    pip3 install mako mistune==0.8.4 mrkd && \
+    make -j$(nproc)
 
 RUN cd lightning && python3 -m poetry run make install 
 
