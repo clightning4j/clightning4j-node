@@ -1,6 +1,2 @@
-plugin=/opt/btcli4j.sh
-plugin=/opt/lightning-rest.sh
-#plugin=/opt/go-lnmetrics
-
 log-level=info
-allow-deprecated-apis=true
+allow-deprecated-apis=false

@@ -18,13 +18,13 @@ fn build_ln_directory() string {
 	if !os.exists(ln_dir) {
 		os.mkdir(ln_dir) or { panic('dir at path $ln_dir not created') }
 		os.execute_or_panic('cp /opt/config $ln_dir/config')
+		os.execute_or_panic('mkdir $ln_dir/plugins')
+		os.execute_or_panic('cp /opt/*.sh $ln_dir/plugins/')
 		os.execute_or_panic('chown -R clightning4j $ln_dir')
 	}
 	run_tor()
 	return ln_dir
 }
-
-println(os.args)
 
 mut args_str := ''
 for idx in 1 .. os.args.len {

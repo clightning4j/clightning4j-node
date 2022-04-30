@@ -14,7 +14,7 @@ WORKDIR /lnmetrics
 
 RUN git clone https://github.com/LNOpenMetrics/go-lnmetrics.reporter.git && cd go-lnmetrics.reporter && \
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.45.2 && \
-    make
+    CGO_ENABLED=0 go build -tags netgo -a -v -o go-lnmetrics cmd/go-lnmetrics.reporter/main.go
 
 FROM alpine:3.14.3
 LABEL maintainer="Vincenzo Palazzo (@vincenzopalazzo) vincenzopalazzodev@gmail.com"
@@ -63,7 +63,7 @@ RUN v --help
 
 COPY --from=0 /jdk/lightning-rest/build/libs/*.jar /opt/
 COPY --from=0 /jdk/btcli4j/build/libs/*.jar /opt/
-COPY --from=golang_builder /lnmetrics/go-lnmetrics.reporter/go-lnmetrics /opt/
+COPY --from=golang_builder /lnmetrics/go-lnmetrics.reporter/go-lnmetrics /opt/go-lnmetrics
 COPY config/* /opt/
 COPY torrc /etc/tor/torrc
 COPY entrypoint.sh /entrypoint.sh
