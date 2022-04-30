@@ -250,7 +250,7 @@ RunAsDaemon 1
 ## The %include option can be used recursively.
 #%include /etc/torrc.d/*.conf
 
-ExitPolicy reject *:* # no exits allowed
+#ExitPolicy reject *:* # no exits allowed
 
 ControlPort 9051
 CookieAuthentication 1
