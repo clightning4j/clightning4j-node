@@ -14,4 +14,4 @@ jobs:
       - name: Integration testing
         run: |
           cd ${{matrix.VERSION}}
-          docker-compose up
+          docker-compose up --exit-code-from lightningd
