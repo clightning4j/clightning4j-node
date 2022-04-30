@@ -23,7 +23,7 @@ services:
             - ./data:/home/clightning4j
         command:
             --network=bitcoin
-            --alias=clihgnting4j-node
+            --alias=clighting4j-node
             --rgb=f07178
             --disable-plugin=bcli
             --log-level=debug
