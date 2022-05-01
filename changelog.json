@@ -1,0 +1,16 @@
+{
+  "package_name": "clightning4j-node",
+  "version": "v0.11.0",
+  "api": {
+    "name": "github",
+    "repository": "clightning4j/clightning4j-node",
+    "branch": "main"
+  },
+  "generation_method": {
+    "name": "metadata",
+    "header_filter": false
+  },
+  "serialization_method": {
+    "name": "md"
+  }
+}
