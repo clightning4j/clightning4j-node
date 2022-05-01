@@ -37,5 +37,5 @@ jobs:
         with:
           context: ${{ steps.vars.outputs.tag }}
           platforms: linux/amd64
-          push: ${{ github.event_name == 'release' }}
+          push: true
           tags: vincenzopalazzo/clightning4j-node:${{ steps.vars.outputs.tag }}
