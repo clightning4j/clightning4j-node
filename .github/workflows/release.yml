@@ -6,15 +6,14 @@ on:
     tags:
       - v*
 
-
 jobs:
   docker:
     runs-on: ubuntu-latest
-    steps:release:
-    types: [created]
-    tags:
-      - v*
-  @v2
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
