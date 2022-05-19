@@ -1,3 +1,9 @@
+# v0.11.1
+
+## Added
+- cln hot fix release v0.11.1 ([commit](https://github.com/clightning4j/clightning4j-node/commit/a9a9a1b51564143cbaec6b61d9ab1a36607cbb1b)). @vincenzopalazzo 19-05-2022
+
+
 # v0.11.0
 
 ## Added
