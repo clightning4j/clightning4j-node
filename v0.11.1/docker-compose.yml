@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+    lightningd:
+        build: .
+        volumes:
+            - ./data:/home/clightning4j
+        command:
+            --network=testnet
+            --alias=clighnting4j-node
+            --rgb=f07178
+            --disable-plugin=bcli
+            --log-level=debug
+            --grpc-port=8001
+            --lnmetrics-urls=https://api.lnmetrics.info/query
+            --bind-addr=127.0.0.1:9735
+            --proxy=127.0.0.1:9050
+            --addr=statictor:127.0.0.1:9051
+            --log-file=/home/clightning4j/.lightning/log.log
+            --daemon
