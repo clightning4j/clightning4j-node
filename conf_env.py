@@ -7,10 +7,18 @@ import shutil
 from os import path
 
 
-def run_cmd(cmd: str, shell: bool = False):
+def run_cmd(cmd: str, shell: bool = False) -> int:
     process = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
     print(process.stdout.decode("utf-8"))
     return process.returncode
+
+
+def look_cmd(cmd: str) -> int:
+    p = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, bufsize=1)
+    for line in iter(p.stdout.readline, b""):
+        print(line)
+    p.stdout.close()
+    return p.returncode
 
 
 def copyfiles(srcdir: str, dstdir: str, filepattern: str):
@@ -58,4 +66,4 @@ if __name__ == "__main__":
         ln_dir = build_ln_directory()
         cmd = f"lightningd --lightning-dir={ln_dir} {args_str}"
         print(f"cmd prepared is: {cmd}")
-        sys.exit(run_cmd(cmd, shell=True))
+        sys.exit(look_cmd(cmd))
