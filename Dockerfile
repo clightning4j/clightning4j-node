@@ -31,7 +31,7 @@ RUN apk update && \
     apk add ca-certificates alpine-sdk autoconf automake git libtool \
     gmp-dev sqlite-dev python3 py3-mako net-tools zlib-dev libsodium gettext su-exec \
     python3 py3-pip python3-dev libffi-dev openssl-dev postgresql postgresql-contrib postgresql-dev \
-    cmake protobuf-dev
+    cmake
 
 RUN git clone https://github.com/ElementsProject/lightning.git && \
     cd lightning && \
