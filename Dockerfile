@@ -53,12 +53,13 @@ RUN apk add openjdk11-jre && \
 COPY --from=0 /jdk/lightning-rest/build/libs/*.jar /opt/
 COPY --from=0 /jdk/btcli4j/build/libs/*.jar /opt/
 COPY --from=golang_builder /lnmetrics/go-lnmetrics.reporter/go-lnmetrics /opt/go-lnmetrics
-COPY config/* /opt/
+COPY config/plugins/*.sh /opt/
+COPY config /opt/
 COPY torrc /etc/tor/torrc
 COPY entrypoint.sh /entrypoint.sh
 COPY conf_env.py /opt/
 
-RUN echo $(lightningd r--version)
+RUN echo $(lightningd --version)
 
 VOLUME ["/etc/torrc.d"]
 VOLUME ["/var/lib/tor"]
