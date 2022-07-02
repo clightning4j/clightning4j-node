@@ -1,6 +1,6 @@
 {
   "package_name": "clightning4j-node",
-  "version": "v0.11.1",
+  "version": "v0.11.2-dev2",
   "api": {
     "name": "github",
     "repository": "clightning4j/clightning4j-node",
