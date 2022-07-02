@@ -14,7 +14,7 @@ def run_cmd(cmd: str, shell: bool = False) -> int:
 
 
 def look_cmd(cmd: str) -> int:
-    p = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, bufsize=1)
+    p = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, bufsize=0)
     for line in iter(p.stdout.readline, b""):
         print(line)
     p.stdout.close()
