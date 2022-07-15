@@ -45,10 +45,10 @@ def build_ln_directory() -> str:
     ln_dir = os.environ["CLIGHTNING_DATA"]
     if not path.exists(ln_dir):
         run_cmd(f"mkdir {ln_dir}")
-        run_cmd(f"cp -rf /opt/config {ln_dir}/config")
         run_cmd(f"mkdir {ln_dir}/plugins")
-        copyfiles("/opt", f"{ln_dir}/plugins", "*.sh")
-        run_cmd(f"chown -R clightning4j {ln_dir}")
+    run_cmd(f"cp -rf /opt/config {ln_dir}/config")
+    copyfiles("/opt", f"{ln_dir}/plugins", "*.sh")
+    run_cmd(f"chown -R clightning4j {ln_dir}")
     run_tor()
     return ln_dir
 
