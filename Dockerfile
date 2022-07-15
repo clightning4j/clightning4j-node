@@ -42,6 +42,10 @@ RUN git clone https://github.com/ElementsProject/lightning.git && \
     pip3 install mako mistune==0.8.4 mrkd && \
     make -j$(nproc) && make install
 
+RUN git clone https://github.com/lightningd/plugins.git && \
+    cd plugins/commando && pip3 install -r requirements.txt && cd .. && \
+    cp -rf commando/ /opt/commando/
+
 RUN apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/community/ add \
       tor torsocks && \
     apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ add \
