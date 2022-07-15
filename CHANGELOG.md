@@ -1,3 +1,9 @@
+# v0.11.2-dev6
+
+## Fixed
+- docker: refres conf file and plugins they may change during upgrade ([commit](https://github.com/clightning4j/clightning4j-node/commit/efdb58900edf3c8d3a38f2f7e5db913281eeca6e)). @vincenzopalazzo 15-07-2022
+
+
 # v0.11.2-dev2
 
 
