@@ -1,3 +1,12 @@
+# v0.12.0-rc1-hotfix.1
+
+## Added
+- remove python plugin commando and use the commando C plugin ([commit](https://github.com/clightning4j/clightning4j-node/commit/d197f6acd451fb664a395b189c00c2dce45868c5)). @vincenzopalazzo 03-08-2022
+
+## Fixed
+- conf: remove the python commando plugin from conf ([commit](https://github.com/clightning4j/clightning4j-node/commit/bac772465c5f776f6d375ae5a71aa0e574419855)). @vincenzopalazzo 03-08-2022
+
+
 # v0.12.0-rc1
 
 ## Added
