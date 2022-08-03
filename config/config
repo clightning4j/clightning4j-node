@@ -1,3 +1,2 @@
 log-level=info
 allow-deprecated-apis=false
-plugin=/opt/commando/commando.py
