@@ -21,7 +21,7 @@ LABEL maintainer="Vincenzo Palazzo (@vincenzopalazzo) vincenzopalazzodev@gmail.c
 
 RUN addgroup -S clightning4jgroup && adduser -S clightning4j -G clightning4jgroup
 
-ENV CLIGHTNING_VERSION=0.11.2
+ENV CLIGHTNING_VERSION=v0.12.0rc1
 ENV CLIGHTNING_DATA=/home/clightning4j/.lightning
 ENV HOME=/home/clightning4j
 
@@ -41,10 +41,6 @@ RUN git clone https://github.com/ElementsProject/lightning.git && \
     pip3 install --upgrade pip && \
     pip3 install mako mistune==0.8.4 mrkd && \
     make -j$(nproc) && make install
-
-RUN git clone https://github.com/lightningd/plugins.git && \
-    cd plugins/commando && pip3 install -r requirements.txt && cd .. && \
-    cp -rf commando/ /opt/commando/
 
 RUN apk --update --allow-untrusted --repository http://dl-4.alpinelinux.org/alpine/edge/community/ add \
       tor torsocks && \

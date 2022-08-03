@@ -1,3 +1,9 @@
+# v0.12.0-rc1
+
+## Added
+- remove python plugin commando and use the commando C plugin ([commit](https://github.com/clightning4j/clightning4j-node/commit/3464e71a6eda636d86ce77d4fc88c654cb3d5a2f)). @vincenzopalazzo 03-08-2022
+
+
 # v0.11.2-dev6
 
 ## Fixed
