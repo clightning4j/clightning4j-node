@@ -13,43 +13,30 @@
 
 A c-lightning node that ran on clightning4j to enable a easy access to c-lightning node.
 
-This docker image is powered by clightning4j tools, to give an addition method to ran [c-lightning](https://github.com/ElementsProject/lightning)
+This docker image is powered by clightning4j tools, to give an addition method to ran [core lightning](https://github.com/ElementsProject/lightning)
 node with 0 or less configuration process.
 
 The following list contains what the image contains for each version:
 
-- v0.10.0 clightning4j-node
-    - [btcli4j](https://github.com/clightning4j/btcli4j): A plugin to support the Rest API with [esplora]() and Bitcoin Core 0.21.0.
-    - [lightning-rest](https://github.com/clightning4j/lightning-rest): Enable a experimental Rest API of c-lightning node.
-- v0.10.1 clightning4j-node
-    - [btcli4j](https://github.com/clightning4j/btcli4j): A plugin to support the Rest API with [esplora]() and Bitcoin Core 0.21.0.
-    - [lightning-rest](https://github.com/clightning4j/lightning-rest): Enable a experimental Rest API of c-lightning node.
-    - [ln-dashboard](https://github.com/clightning4j/ln-dashboard): Enable a experimental dashboard to see basic information of c-lightning node.
+The docker image support a couple of plugin with it:
+
+- grpc plugin: Powered by core lightning.
+- [btcli4j](https://github.com/clightning4j/btcli4j): core lightning plugin to override Bitcoin backend plugin with esplora by Blockstream and give the possibility to make the running process with bitcoind in pruning mode more solid.
+- [lnmetrics](https://github.com/LNOpenMetrics/go-lnmetrics.reporter): core lightning plugin to collect and report of the lightning node metrics.
 
 ## How to Use
 
-To use the image is possible use the docker or docker compose.
+```bash
+docker-compose up
+```
 
-### Docker Compose
+### Docker Compose Example
 
-- v0.10.0 clightning4j-node
-    - [Example: pruning mode](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.0/prune-mode-docker-compose.yml)
-    - [Example: Esplora rest](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.0/rest-mode-docker-compose.yml)
-- v0.10.1 clightning4j-node
-    - [Example: pruning mode](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.1/prune-mode-docker-compose.yml)
-    - [Example: Esplora rest](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.1/rest-mode-docker-compose.yml)
-    - [Example: Esplora rest with UI dashboard](https://github.com/clightning4j/clightning4j-node/blob/main/0.10.1/ui-rest-mode-docker-compose.yml)
-
-
-To enable the rest service you can run the following commands
-
+In the `example` directory you can find a couple of example on how to run the docker compose, and after it is up and running you can query the node with the
+following command
 ```bash
 docker-compose run -T lightningd lightning-cli restserver start
 ```
-
-### Docker image
-
-TODO
 
 ## Support
 
@@ -74,19 +61,19 @@ If you like the architecture developer and want to support it, please considerer
   <img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" width="150" height="150"/>
 </div>
 
-A c-lightning node that ran on clightning4j to enable a easy access to c-lightning node.
+A core lightning node that ran on clightning4j to enable a easy access to lightning node.
 
- Copyright (C) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com
- 
+ Copyright (C) 2021-2022 Vincenzo Palazzo vincenzopalazzodev@gmail.com
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
- 
+
  You should have received a copy of the GNU General Public License along
  with this program; if not, write to the Free Software Foundation, Inc.,
  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
