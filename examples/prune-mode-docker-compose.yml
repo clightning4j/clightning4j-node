@@ -9,26 +9,26 @@ services:
             -rpcpassword=clightning4j
             -server
             -listen
+            -testnet
             -prune=550
         ports:
         - 8332:8332
 
     lightningd:
-        image: vincenzopalazzo/clightning4j-node:v0.11.0
-        depends_on: 
+        image: vincenzopalazzo/clightning4j-node:v0.12.0-rc1-hotfix.1
+        depends_on:
             - bitcoind
         volumes:
             - ./data:/home/clightning4j
-        ports: 
+        ports:
             - 7000:7000
         command:
-            --network=bitcoin 
-            --alias=clighnting4j-node 
+            --network=testnet
+            --alias=clighting4j-node
             --disable-plugin=bcli
-            --bitcoin-rpcuser=clightning4j 
+            --bitcoin-rpcuser=clightning4j
             --bitcoin-rpcpassword=clightning4j
-            --bitcoin-rpcurl=http://bitcoind_default:8332 
+            --bitcoin-rpcurl=http://bitcoind_default:8332
             --btcli4j-pruned
             --lnmetrics-urls=https://api.lnmetrics.info/query
             --log-level=debug
-            --jrest-port=7000

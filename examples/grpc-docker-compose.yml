@@ -2,20 +2,20 @@ version: "3.8"
 
 services:
   lightningd:
-    image: vincenzopalazzo/clightning4j-node:v0.11.0
+    image: vincenzopalazzo/clightning4j-node:v0.12.0-rc1-hotfix.1
     volumes:
       - ./data:/home/clightning4j
     ports:
       - "8001:8001"
     command:
         --network=testnet
-        --alias=clighnting4j-node
+        --alias=clighting4j-node-testnet
         --rgb=f07178
         --disable-plugin=bcli
         --log-level=debug
         --grpc-port=8001
         --lnmetrics-urls=https://api.lnmetrics.info/query
-        --bind-addr=127.0.0.1:9735
+        --bind-addr=127.0.0.1
         --proxy=127.0.0.1:9050
         --addr=statictor:127.0.0.1:9051
         --log-file=/home/clightning4j/.lightning/log.log
