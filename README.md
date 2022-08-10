@@ -35,7 +35,7 @@ docker-compose up
 In the `example` directory you can find a couple of example on how to run the docker compose, and after it is up and running you can query the node with the
 following command
 ```bash
-docker-compose run -T lightningd lightning-cli restserver start
+docker-compose run -T lightningd lightning-cli --testnet getinfo
 ```
 
 ## Support
