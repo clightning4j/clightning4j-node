@@ -1,3 +1,9 @@
+# v0.12.0-rc2
+
+## Added
+- incread alpine version and cleanup image ([commit](https://github.com/clightning4j/clightning4j-node/commit/6a4eb9b859c8861142ff91c45f3b6580591afb3f)). @vincenzopalazzo 11-08-2022
+
+
 # v0.12.0-rc1-hotfix.1
 
 ## Added
