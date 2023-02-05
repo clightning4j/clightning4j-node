@@ -1,3 +1,9 @@
+# v22.11.1
+
+## Added
+- build image for the v22.11.1 version ([commit](https://github.com/clightning4j/clightning4j-node/commit/eb70b7b0e842d164b95154ce87aa2a11dd0044da)). @vincenzopalazzo 05-02-2023
+
+
 # v0.12.0-rc2
 
 ## Added
