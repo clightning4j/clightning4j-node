@@ -1,10 +1,10 @@
 {
   "package_name": "clightning4j-node",
-  "version": "v22.11.1",
+  "version": "v23.02.1",
   "api": {
     "name": "github",
     "repository": "clightning4j/clightning4j-node",
-    "branch": "main"
+    "branch": "mascros/v23.02.1"
   },
   "generation_method": {
     "name": "semver-v2",

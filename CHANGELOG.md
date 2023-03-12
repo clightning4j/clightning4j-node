@@ -1,3 +1,9 @@
+# v23.02.1
+
+## Added
+- build the new v23.02.1 point release ([commit](https://github.com/clightning4j/clightning4j-node/commit/60ffbaffb4d24ba01757179537825e1acfa0b82b)). @vincenzopalazzo 12-03-2023
+
+
 # v22.11.1
 
 ## Added
