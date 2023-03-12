@@ -21,7 +21,7 @@ LABEL maintainer="Vincenzo Palazzo (@vincenzopalazzo) vincenzopalazzodev@gmail.c
 
 RUN addgroup -S clightning4jgroup && adduser -S clightning4j -G clightning4jgroup
 
-ENV CLIGHTNING_VERSION=v23.02rc3
+ENV CLIGHTNING_VERSION=v23.02.1
 ENV CLIGHTNING_DATA=/home/clightning4j/.lightning
 ENV HOME=/home/clightning4j
 
